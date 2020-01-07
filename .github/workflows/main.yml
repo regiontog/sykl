@@ -16,7 +16,8 @@ jobs:
     - name: Run cargo doc
       uses: actions-rs/cargo@v1
       with:
-        command: doc --document-private-items
+        command: doc
+        args: --document-private-items
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
