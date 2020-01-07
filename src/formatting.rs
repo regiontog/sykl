@@ -27,6 +27,7 @@ const HEADER: Row<'static> = Row {
 /// Prints each stations name, number of available docks and number of available
 /// bikes in 3 columns per row with a header row.
 pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a JoinedStation> + Clone) {
+    // Convert the stations iterator to a iterator of Row structs.
     let rows = stations.map(|station| Row {
         name: Cow::Borrowed(&station.name),
         docks: station
@@ -43,26 +44,20 @@ pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a Joine
 
     let rows = std::iter::once(HEADER).chain(rows);
 
-    let len_name = rows
-        .clone()
-        .map(|row| row.name.len())
-        .max()
-        .expect("There should atleast be a header in rows")
-        + EXTRA_PADDING;
+    let mut len_name = 0;
+    let mut len_docks = 0;
+    let mut len_bikes = 0;
 
-    let len_docks = rows
-        .clone()
-        .map(|row| row.docks.len())
-        .max()
-        .expect("There should atleast be a header in rows")
-        + EXTRA_PADDING;
+    // Iterate once to find the longest string for each column.
+    for row in rows.clone() {
+        len_name = len_name.max(row.name.len());
+        len_docks = len_docks.max(row.docks.len());
+        len_bikes = len_bikes.max(row.bikes.len());
+    }
 
-    let len_bikes = rows
-        .clone()
-        .map(|row| row.bikes.len())
-        .max()
-        .expect("There should atleast be a header in rows")
-        + EXTRA_PADDING;
+    len_name += EXTRA_PADDING;
+    len_docks += EXTRA_PADDING;
+    len_bikes += EXTRA_PADDING;
 
     for row in rows {
         println!(
