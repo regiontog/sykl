@@ -39,3 +39,9 @@ Hoffsveien                     18                0
 Nydalen                        18                0
 ...
 ```
+
+# Documentation
+This repo has a Github pages with the documentation, but untill a [bug](https://github.community/t5/GitHub-Actions/Github-action-not-triggering-gh-pages-upon-push/td-p/26869) in github is resolved it is not visible as pushed from GitHub actions don't trigger the Github Pages build. The documentation can be build from source with.
+```bash
+> cargo doc --document-private-items --open
+```
