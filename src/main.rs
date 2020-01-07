@@ -1,5 +1,6 @@
 mod api;
 mod bikeshare;
+mod formatting;
 
 fn main() -> Result<(), attohttpc::Error> {
     let status = api::status()?;
@@ -7,7 +8,7 @@ fn main() -> Result<(), attohttpc::Error> {
 
     let stations = bikeshare::join(status.data, info.data);
 
-    println!("{:#?}", stations);
+    formatting::pretty_print_stations(&stations);
 
     Ok(())
 }

@@ -8,35 +8,35 @@ pub(super) struct Api<T> {
     pub(super) data: ApiData<T>,
 
     #[serde(with = "ts_seconds")]
-    last_updated: DateTime<Utc>,
+    pub(super) last_updated: DateTime<Utc>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
 pub(super) struct ApiData<T> {
-    stations: Vec<T>,
+    pub(super) stations: Vec<T>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
 pub(super) struct Status {
-    station_id: String,
-    is_installed: u64,
-    is_renting: u64,
-    num_bikes_available: u64,
-    num_docks_available: u64,
-    is_returning: u64,
+    pub(super) station_id: String,
+    pub(super) is_installed: u64,
+    pub(super) is_renting: u64,
+    pub(super) num_bikes_available: u64,
+    pub(super) num_docks_available: u64,
+    pub(super) is_returning: u64,
 
     #[serde(with = "ts_seconds")]
-    last_reported: DateTime<Utc>,
+    pub(super) last_reported: DateTime<Utc>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
 pub(super) struct Information {
-    station_id: String,
-    name: String,
-    address: String,
-    lat: f64,
-    lon: f64,
-    capacity: u64,
+    pub(super) station_id: String,
+    pub(super) name: String,
+    pub(super) address: String,
+    pub(super) lat: f64,
+    pub(super) lon: f64,
+    pub(super) capacity: u64,
 }
 
 #[derive(Debug)]
@@ -56,7 +56,6 @@ pub(super) struct JoinedStation {
 
 #[derive(Debug)]
 pub(super) struct JoinedStatus {
-    // Attributes from status
     pub(super) is_installed: u64,
     pub(super) is_renting: u64,
     pub(super) num_bikes_available: u64,
