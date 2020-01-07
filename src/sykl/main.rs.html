@@ -53,6 +53,8 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Write</span>;
 
@@ -62,52 +64,54 @@
 <span class="kw">mod</span> <span class="ident">bikeshare</span>;
 <span class="kw">mod</span> <span class="ident">formatting</span>;
 
+<span class="kw">struct</span> <span class="ident">Void</span>;
+
 <span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
-    <span class="ident">std</span>::<span class="ident">process</span>::<span class="ident">exit</span>(<span class="ident">handle_error</span>(<span class="op">|</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="ident">api</span>::<span class="ident">status</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">api</span>::<span class="ident">information</span>()<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">return_val</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">print</span>() {
+        <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">0</span>,
+        <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">handle_error</span>(<span class="ident">e</span>)<span class="question-mark">?</span>,
+    };
 
-        <span class="kw">let</span> <span class="ident">stations</span> <span class="op">=</span> <span class="ident">bikeshare</span>::<span class="ident">join</span>(<span class="ident">status</span>.<span class="ident">data</span>, <span class="ident">info</span>.<span class="ident">data</span>);
+    <span class="ident">std</span>::<span class="ident">process</span>::<span class="ident">exit</span>(<span class="ident">return_val</span>);
+}
 
-        <span class="ident">formatting</span>::<span class="ident">pretty_print_stations</span>(<span class="ident">stations</span>.<span class="ident">values</span>());
+<span class="kw">fn</span> <span class="ident">print</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Void</span>, <span class="ident">attohttpc</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="ident">api</span>::<span class="ident">status</span>()<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">api</span>::<span class="ident">information</span>()<span class="question-mark">?</span>;
 
-        <span class="prelude-val">Ok</span>(())
-    })<span class="question-mark">?</span>)
+    <span class="kw">let</span> <span class="ident">stations</span> <span class="op">=</span> <span class="ident">bikeshare</span>::<span class="ident">join</span>(<span class="ident">status</span>.<span class="ident">data</span>, <span class="ident">info</span>.<span class="ident">data</span>);
+
+    <span class="ident">formatting</span>::<span class="ident">pretty_print_stations</span>(<span class="ident">stations</span>.<span class="ident">values</span>());
+
+    <span class="prelude-val">Ok</span>(<span class="ident">Void</span>)
 }
 
 <span class="doccomment">/// A &quot;best effort&quot; to print a usable error to the user in case something goes wrong.</span>
-<span class="kw">fn</span> <span class="ident">handle_error</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(
-    <span class="ident">f</span>: <span class="kw">impl</span> <span class="ident">FnOnce</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">attohttpc</span>::<span class="ident">Error</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">match</span> <span class="ident">f</span>() {
-        <span class="prelude-val">Err</span>(<span class="ident">error</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cause</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
+<span class="kw">fn</span> <span class="ident">handle_error</span>(<span class="ident">error</span>: <span class="ident">attohttpc</span>::<span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">cause</span> <span class="op">=</span> <span class="ident">String</span>::<span class="ident">new</span>();
 
-            <span class="kw">match</span> <span class="ident">error</span>.<span class="ident">kind</span>() {
-                <span class="ident">ErrorKind</span>::<span class="ident">Json</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
-                    <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>,
-                    <span class="string">&quot;Could not deserialize json from endpoint into model:\n{}&quot;</span>,
-                    <span class="ident">e</span>
-                )<span class="question-mark">?</span>,
-                <span class="ident">ErrorKind</span>::<span class="ident">Http</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>, <span class="string">&quot;Http protocol error:\n{}&quot;</span>, <span class="ident">e</span>)<span class="question-mark">?</span>,
-                <span class="ident">ErrorKind</span>::<span class="ident">Io</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
-                    <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>,
-                    <span class="string">&quot;Problem with the connection to remote api:\n{}&quot;</span>,
-                    <span class="ident">e</span>
-                )<span class="question-mark">?</span>,
-                <span class="ident">e</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>, <span class="string">&quot;Unknown error: {:?}&quot;</span>, <span class="ident">e</span>)<span class="question-mark">?</span>,
-            }
-
-            <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Failed to get bikeshare data, if you belive this is a problem with this\napplication please report the error at https://github.com/regiontog/sykl/issues&quot;</span>);
-
-            <span class="kw">if</span> <span class="op">!</span><span class="ident">cause</span>.<span class="ident">is_empty</span>() {
-                <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;\nCaused by: {}&quot;</span>, <span class="ident">cause</span>);
-            }
-
-            <span class="prelude-val">Ok</span>(<span class="op">-</span><span class="number">1</span>)
-        }
-        <span class="prelude-val">Ok</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="number">0</span>),
+    <span class="kw">match</span> <span class="ident">error</span>.<span class="ident">kind</span>() {
+        <span class="ident">ErrorKind</span>::<span class="ident">Json</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>,
+            <span class="string">&quot;Could not deserialize json from endpoint into model:\n{}&quot;</span>,
+            <span class="ident">e</span>
+        )<span class="question-mark">?</span>,
+        <span class="ident">ErrorKind</span>::<span class="ident">Http</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>, <span class="string">&quot;Http protocol error:\n{}&quot;</span>, <span class="ident">e</span>)<span class="question-mark">?</span>,
+        <span class="ident">ErrorKind</span>::<span class="ident">Io</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(
+            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>,
+            <span class="string">&quot;Problem with the connection to remote api:\n{}&quot;</span>,
+            <span class="ident">e</span>
+        )<span class="question-mark">?</span>,
+        <span class="ident">e</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">cause</span>, <span class="string">&quot;Unknown error: {:?}&quot;</span>, <span class="ident">e</span>)<span class="question-mark">?</span>,
     }
+
+    <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Failed to get bikeshare data, if you belive this is a problem with this\napplication please report the error at https://github.com/regiontog/sykl/issues&quot;</span>);
+
+    <span class="kw">if</span> <span class="op">!</span><span class="ident">cause</span>.<span class="ident">is_empty</span>() {
+        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;\nCaused by: {}&quot;</span>, <span class="ident">cause</span>);
+    }
+
+    <span class="prelude-val">Ok</span>(<span class="op">-</span><span class="number">1</span>)
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "sykl";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
