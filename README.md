@@ -1,5 +1,5 @@
 # Installing
-If you are on x86-64 windows or linux you can download a prebuilt binary from [github releases](https://github.com/regiontog/sykl/releases). The binaries here are _not_ installers, but the executables themselves.
+If you are on x86-64 windows or linux you can download a prebuilt binary from [github releases](https://github.com/regiontog/sykl/releases). The binaries here are _not_ installers, but the program itself.
 
 # Running
 The application takes no arguments and writes to stdout, so it should be ran from the command line.
