@@ -1,5 +1,5 @@
 # Installing
-If you are on x86-64 windows or linux you can download a prebuild binary from [github releases](https://github.com/regiontog/sykl/releases)
+If you are on x86-64 windows or linux you can download a prebuilt binary from [github releases](https://github.com/regiontog/sykl/releases)
 
 # Running
 The application takes no arguments and writes to stdout, so it should be ran from the command line.
@@ -41,7 +41,7 @@ Nydalen                        18                0
 ```
 
 # Documentation
-This repo has a Github pages with the documentation, but untill a [bug](https://github.community/t5/GitHub-Actions/Github-action-not-triggering-gh-pages-upon-push/td-p/26869) in github is resolved it is not visible as pushed from GitHub actions don't trigger the Github Pages build. The documentation can be build from source with.
+This repo has a Github pages with the documentation, but untill a [bug](https://github.community/t5/GitHub-Actions/Github-action-not-triggering-gh-pages-upon-push/td-p/26869) in github is resolved it is not visible as pushes from GitHub actions don't trigger the Github Pages build. The documentation can be build from source in the source directory with:
 ```bash
 > cargo doc --document-private-items --open
 ```
