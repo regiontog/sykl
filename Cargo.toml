@@ -2,7 +2,9 @@
 name = "sykl"
 version = "0.1.0"
 authors = ["Erlend Tobiassen <erlend.tobiassen@gmail.com>"]
+description = "A simple application that prints information about bikeshare stations in Oslo"
 edition = "2018"
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
