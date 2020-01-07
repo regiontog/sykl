@@ -2,8 +2,12 @@ mod api;
 mod bikeshare;
 
 fn main() -> Result<(), attohttpc::Error> {
-    println!("{:#?}", api::status()?);
-    println!("{:#?}", api::information()?);
+    let status = api::status()?;
+    let info = api::information()?;
+
+    let stations = bikeshare::join(status.data, info.data);
+
+    println!("{:#?}", stations);
 
     Ok(())
 }
