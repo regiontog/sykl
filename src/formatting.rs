@@ -1,8 +1,9 @@
 use std::borrow::Cow;
-use std::collections::HashMap;
+use std::iter::Iterator;
 
 use super::bikeshare::JoinedStation;
 
+/// This struct represents a row in the pretty printed output.
 #[derive(Clone)]
 struct Row<'a> {
     name: Cow<'a, str>,
@@ -10,17 +11,23 @@ struct Row<'a> {
     bikes: Cow<'a, str>,
 }
 
+/// The extra padding to add in addition to the length of the longest value of the column.
 const EXTRA_PADDING: usize = 3;
+
+/// The string to use in the case where no status information is available for a station.
 const PLACEHOLDER: Cow<'static, str> = Cow::Borrowed("---");
 
+/// The headers used in the pretty print.
 const HEADER: Row<'static> = Row {
     name: Cow::Borrowed("NAME"),
     docks: Cow::Borrowed("AVAILABLE DOCKS"),
     bikes: Cow::Borrowed("AVAILABLE BIKES"),
 };
 
-pub(super) fn pretty_print_stations(stations: &HashMap<String, JoinedStation>) {
-    let rows = stations.values().map(|station| Row {
+/// Prints each stations name, number of available docks and number of available
+/// bikes in 3 columns per row with a header row.
+pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a JoinedStation> + Clone) {
+    let rows = stations.map(|station| Row {
         name: Cow::Borrowed(&station.name),
         docks: station
             .status
