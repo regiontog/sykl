@@ -30,16 +30,8 @@ pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a Joine
     // Convert the stations iterator to a iterator of Row structs.
     let rows = stations.map(|station| Row {
         name: Cow::Borrowed(&station.name),
-        docks: station
-            .status
-            .as_ref()
-            .map(|status| Cow::Owned(status.num_docks_available.to_string()))
-            .unwrap_or(PLACEHOLDER),
-        bikes: station
-            .status
-            .as_ref()
-            .map(|status| Cow::Owned(status.num_bikes_available.to_string()))
-            .unwrap_or(PLACEHOLDER),
+        docks: station.docks_available_str(PLACEHOLDER),
+        bikes: station.bikes_available_str(PLACEHOLDER),
     });
 
     let rows = std::iter::once(HEADER).chain(rows);
