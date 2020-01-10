@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["handle_error","A \"best effort\" to print a usable error to the user in case something goes wrong."],["main",""],["print",""]],"mod":[["api",""],["bikeshare",""],["formatting",""]],"struct":[["Void",""]]});
+initSidebarItems({"fn":[["handle_error","A \"best effort\" to print a usable error to the user in case something goes wrong."],["main",""],["print",""]],"mod":[["formatting",""]],"struct":[["Void",""]]});

@@ -1,3 +1,4 @@
 var N = null;var sourcesIndex = {};
-sourcesIndex["sykl"] = {"name":"","files":["api.rs","bikeshare.rs","formatting.rs","main.rs"]};
+sourcesIndex["bikeshare"] = {"name":"","files":["api.rs","lib.rs","types.rs"]};
+sourcesIndex["sykl"] = {"name":"","files":["formatting.rs","main.rs"]};
 createSourceSidebar();
