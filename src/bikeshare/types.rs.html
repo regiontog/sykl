@@ -165,7 +165,7 @@
 <span class="doccomment">/// The status struct contains &quot;dynamic&quot; content about stations and the</span>
 <span class="doccomment">/// information endpoint has the &quot;static&quot; content. This struct represents</span>
 <span class="doccomment">/// a join of them both. The status content may be missing.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">JoinedStation</span> {
     <span class="kw">pub</span> <span class="ident">station_id</span>: <span class="ident">String</span>,
 
@@ -181,7 +181,7 @@
 }
 
 <span class="doccomment">/// The status content of `JoinedStation`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">JoinedStatus</span> {
     <span class="kw">pub</span> <span class="ident">is_installed</span>: <span class="ident">u64</span>,
     <span class="kw">pub</span> <span class="ident">is_renting</span>: <span class="ident">u64</span>,
