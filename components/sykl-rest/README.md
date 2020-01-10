@@ -59,7 +59,8 @@ curl http://localhost:8080/stations
             "is_renting": 1,
             "num_bikes_available": 0,
             "num_docks_available": 39,
-            "is_returning": 1,"last_reported": "2020-01-10T18:33:02Z"
+            "is_returning": 1,
+            "last_reported": "2020-01-10T18:33:02Z"
         }
     },
     "502": {
@@ -74,7 +75,8 @@ curl http://localhost:8080/stations
             "is_renting": 1,
             "num_bikes_available": 0,
             "num_docks_available": 35,
-            "is_returning": 1,"last_reported": "2020-01-10T18:33:02Z"
+            "is_returning": 1,
+            "last_reported": "2020-01-10T18:33:02Z"
         }
     },
     "435": {
@@ -87,8 +89,10 @@ curl http://localhost:8080/stations
         "status": {
             "is_installed": 1,
             "is_renting": 1,
-            "num_bikes_available": 0,"num_docks_available": 30,
-            "is_returning": 1,"last_reported": "2020-01-10T18:33:02Z"
+            "num_bikes_available": 0,
+            "num_docks_available": 30,
+            "is_returning": 1,
+            "last_reported": "2020-01-10T18:33:02Z"
         }
     },
     "427": {
