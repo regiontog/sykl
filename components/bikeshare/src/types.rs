@@ -48,7 +48,7 @@ pub struct Information {
 /// The status struct contains "dynamic" content about stations and the
 /// information endpoint has the "static" content. This struct represents
 /// a join of them both. The status content may be missing.
-#[derive(Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct JoinedStation {
     pub station_id: String,
 
@@ -64,7 +64,7 @@ pub struct JoinedStation {
 }
 
 /// The status content of `JoinedStation`.
-#[derive(Debug)]
+#[derive(Deserialize, Serialize, Debug)]
 pub struct JoinedStatus {
     pub is_installed: u64,
     pub is_renting: u64,

@@ -1,0 +1,15 @@
+[package]
+name = "sykl-rest"
+version = "0.1.0"
+authors = ["Erlend Tobiassen <erlend.tobiassen@gmail.com>"]
+description = "A simple application that prints information about bikeshare stations in Oslo"
+edition = "2018"
+license = "MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+bikeshare = { version = "0.1", path = "../bikeshare" }
+actix-web = "2.0"
+actix-http = "1.0"
+actix-rt = "1.0"
