@@ -1,9 +1,8 @@
 use std::fmt::Write;
 
 use attohttpc::ErrorKind;
+use bikeshare::api;
 
-mod api;
-mod bikeshare;
 mod formatting;
 
 struct Void;

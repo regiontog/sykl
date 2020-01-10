@@ -1,14 +1,5 @@
-[package]
-name = "sykl"
-version = "0.1.0"
-authors = ["Erlend Tobiassen <erlend.tobiassen@gmail.com>"]
-description = "A simple application that prints information about bikeshare stations in Oslo"
-edition = "2018"
-license = "MIT"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-attohttpc = { version = "0.9.0", features = ["json", "charsets"] }
-serde = { version = "1.0", features = ["derive"] }
-chrono = { version = "0.4", features = ["serde"] }
+[workspace]
+members = [
+    "components/bikeshare",
+    "components/sykl",
+]

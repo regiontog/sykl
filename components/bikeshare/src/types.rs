@@ -1,5 +1,4 @@
 use std::borrow::Cow;
-use std::collections::HashMap;
 
 use chrono::{serde::ts_seconds, DateTime, Utc};
 use serde::{Deserialize, Serialize};
@@ -7,101 +6,76 @@ use serde::{Deserialize, Serialize};
 /// Both endpoints used by this application has the same top level layout,
 /// this struct generalized over them both.
 #[derive(Deserialize, Serialize, Debug)]
-pub(super) struct Api<T> {
-    pub(super) data: ApiData<T>,
+pub struct Api<T> {
+    pub data: ApiData<T>,
 
     #[serde(with = "ts_seconds")]
-    pub(super) last_updated: DateTime<Utc>,
+    pub last_updated: DateTime<Utc>,
 }
 
 /// Both endpoints used by this application has the same data layout with
 /// the stations key, this struct generalized over them both.
 #[derive(Deserialize, Serialize, Debug)]
-pub(super) struct ApiData<T> {
-    pub(super) stations: Vec<T>,
+pub struct ApiData<T> {
+    pub stations: Vec<T>,
 }
 
 /// The data inside the station_status endpoint is modelled by this struct
 #[derive(Deserialize, Serialize, Debug)]
-pub(super) struct Status {
-    pub(super) station_id: String,
-    pub(super) is_installed: u64,
-    pub(super) is_renting: u64,
-    pub(super) num_bikes_available: u64,
-    pub(super) num_docks_available: u64,
-    pub(super) is_returning: u64,
+pub struct Status {
+    pub station_id: String,
+    pub is_installed: u64,
+    pub is_renting: u64,
+    pub num_bikes_available: u64,
+    pub num_docks_available: u64,
+    pub is_returning: u64,
 
     #[serde(with = "ts_seconds")]
-    pub(super) last_reported: DateTime<Utc>,
+    pub last_reported: DateTime<Utc>,
 }
 
 /// The data inside the station_information endpoint is modelled by this struct
 #[derive(Deserialize, Serialize, Debug)]
-pub(super) struct Information {
-    pub(super) station_id: String,
-    pub(super) name: String,
-    pub(super) address: String,
-    pub(super) lat: f64,
-    pub(super) lon: f64,
-    pub(super) capacity: u64,
+pub struct Information {
+    pub station_id: String,
+    pub name: String,
+    pub address: String,
+    pub lat: f64,
+    pub lon: f64,
+    pub capacity: u64,
 }
 
 /// The status struct contains "dynamic" content about stations and the
 /// information endpoint has the "static" content. This struct represents
 /// a join of them both. The status content may be missing.
 #[derive(Debug)]
-pub(super) struct JoinedStation {
-    pub(super) station_id: String,
+pub struct JoinedStation {
+    pub station_id: String,
 
     // Attributes from information
-    pub(super) name: String,
-    pub(super) address: String,
-    pub(super) lat: f64,
-    pub(super) lon: f64,
-    pub(super) capacity: u64,
+    pub name: String,
+    pub address: String,
+    pub lat: f64,
+    pub lon: f64,
+    pub capacity: u64,
 
     // Attributes from status
-    pub(super) status: Option<JoinedStatus>,
+    pub status: Option<JoinedStatus>,
 }
 
 /// The status content of `JoinedStation`.
 #[derive(Debug)]
-pub(super) struct JoinedStatus {
-    pub(super) is_installed: u64,
-    pub(super) is_renting: u64,
-    pub(super) num_bikes_available: u64,
-    pub(super) num_docks_available: u64,
-    pub(super) is_returning: u64,
-    pub(super) last_reported: DateTime<Utc>,
-}
-
-/// Joins the data from status and information into a hashmap from `station_id -> JoinedStation`.
-/// If a station in the information data is not in the status data the JoinedStation has
-/// `Option::None` in its status attribute.
-pub(super) fn join(
-    status: ApiData<Status>,
-    information: ApiData<Information>,
-) -> HashMap<String, JoinedStation> {
-    let status: HashMap<String, Status> = status
-        .stations
-        .into_iter()
-        .map(|status| (status.station_id.clone(), status))
-        .collect();
-
-    information
-        .stations
-        .into_iter()
-        .map(|info| {
-            (
-                info.station_id.clone(),
-                JoinedStation::new(status.get(&info.station_id), info),
-            )
-        })
-        .collect()
+pub struct JoinedStatus {
+    pub is_installed: u64,
+    pub is_renting: u64,
+    pub num_bikes_available: u64,
+    pub num_docks_available: u64,
+    pub is_returning: u64,
+    pub last_reported: DateTime<Utc>,
 }
 
 impl JoinedStation {
-    fn new(status: Option<&Status>, info: Information) -> Self {
+    pub(super) fn new(status: Option<&Status>, info: Information) -> Self {
         JoinedStation {
             name: info.name,
             address: info.address,
@@ -124,7 +98,7 @@ impl JoinedStation {
 
     /// Gets the number of available docks as a copy-on-write string if status
     /// exists, otherwise return `or` parameter.
-    pub(super) fn docks_available_str<'a>(&self, or: Cow<'a, str>) -> Cow<'a, str> {
+    pub fn docks_available_str<'a>(&self, or: Cow<'a, str>) -> Cow<'a, str> {
         self.status
             .as_ref()
             .map(|status| Cow::Owned(status.num_docks_available.to_string()))
@@ -133,7 +107,7 @@ impl JoinedStation {
 
     /// Gets the number of available bikes as a copy-on-write string if status
     /// exists, otherwise return `or` parameter.
-    pub(super) fn bikes_available_str<'a>(&self, or: Cow<'a, str>) -> Cow<'a, str> {
+    pub fn bikes_available_str<'a>(&self, or: Cow<'a, str>) -> Cow<'a, str> {
         self.status
             .as_ref()
             .map(|status| Cow::Owned(status.num_bikes_available.to_string()))

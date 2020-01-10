@@ -1,7 +1,7 @@
 use std::borrow::Cow;
 use std::iter::Iterator;
 
-use super::bikeshare::JoinedStation;
+use bikeshare::types::JoinedStation;
 
 /// This struct represents a row in the pretty printed output.
 #[derive(Clone)]

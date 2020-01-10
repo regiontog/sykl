@@ -1,4 +1,4 @@
-use super::bikeshare::{Api, Information, Status};
+use super::types::{Api, Information, Status};
 use attohttpc::{Error, Response};
 
 /// The Client-Identifier of this application.
@@ -15,13 +15,13 @@ fn get(url: &str) -> Result<Response, Error> {
 /// Sends a get request to `https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json`,
 /// parses the response as json and deserializes the json response into a bikeshare
 /// struct using serde.
-pub(super) fn status() -> Result<Api<Status>, Error> {
+pub fn status() -> Result<Api<Status>, Error> {
     get("https://gbfs.urbansharing.com/oslobysykkel.no/station_status.json")?.json()
 }
 
 /// Sends a get request to `https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json`,
 /// parses the response as json and deserializes the json response into a bikeshare
 /// struct using serde.
-pub(super) fn information() -> Result<Api<Information>, Error> {
+pub fn information() -> Result<Api<Information>, Error> {
     get("https://gbfs.urbansharing.com/oslobysykkel.no/station_information.json")?.json()
 }
