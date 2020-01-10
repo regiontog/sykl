@@ -1,9 +1,9 @@
 # Components
 ## Sykl
-[README.md](https://github.com/regiontog/sykl/blob/master/components/sykl/README.md)
-
-## Bikeshare
-[README.md](https://github.com/regiontog/sykl/blob/master/components/bikeshare/README.md)
+https://github.com/regiontog/sykl/blob/master/components/sykl
 
 ## Sykl-rest
-[README.md](https://github.com/regiontog/sykl/blob/master/components/sykl-rest/README.md)
+https://github.com/regiontog/sykl/blob/master/components/sykl-rest
+
+## Bikeshare library
+https://github.com/regiontog/sykl/blob/master/components/bikeshare
