@@ -8,6 +8,7 @@ edition = "2018"
 
 [dependencies]
 bikeshare = { version = "0.1", path = "../bikeshare" }
+unicode-width = "0.1"
 
 [dev-dependencies]
 datatest = "0.6"
