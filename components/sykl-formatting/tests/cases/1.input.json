@@ -1,0 +1,18 @@
+[
+    {
+        "station_id": "567",
+        "name": "Forskningsveien",
+        "address": "Forskningsveien",
+        "lat": 59.9454775,
+        "lon": 10.7138465,
+        "capacity": 39,
+        "status": {
+            "is_installed": 1,
+            "is_renting": 1,
+            "num_bikes_available": 0,
+            "num_docks_available": 39,
+            "is_returning": 1,
+            "last_reported": "2020-01-10T18:33:02Z"
+        }
+    }
+]

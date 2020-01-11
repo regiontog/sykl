@@ -26,7 +26,10 @@ const HEADER: Row<'static> = Row {
 
 /// Prints each stations name, number of available docks and number of available
 /// bikes in 3 columns per row with a header row.
-pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a JoinedStation> + Clone) {
+pub fn pretty_print_stations<'a>(
+    mut out: impl std::io::Write,
+    stations: impl Iterator<Item = &'a JoinedStation> + Clone,
+) -> std::io::Result<()> {
     // Convert the stations iterator to a iterator of Row structs.
     let rows = stations.map(|station| Row {
         name: Cow::Borrowed(&station.name),
@@ -52,7 +55,8 @@ pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a Joine
     len_bikes += EXTRA_PADDING;
 
     for row in rows {
-        println!(
+        writeln!(
+            out,
             "{name:len_name$}{docks:len_docks$}{bikes:len_bikes$}",
             name = row.name,
             docks = row.docks,
@@ -60,6 +64,8 @@ pub(super) fn pretty_print_stations<'a>(stations: impl Iterator<Item = &'a Joine
             len_name = len_name,
             len_docks = len_docks,
             len_bikes = len_bikes,
-        )
+        )?;
     }
+
+    Ok(())
 }

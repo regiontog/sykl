@@ -3,4 +3,5 @@ members = [
     "components/bikeshare",
     "components/sykl",
     "components/sykl-rest",
+    "components/sykl-formatting",
 ]

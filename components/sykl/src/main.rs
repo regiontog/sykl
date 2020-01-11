@@ -3,7 +3,7 @@ use std::fmt::Write;
 use attohttpc::ErrorKind;
 use bikeshare::api;
 
-mod formatting;
+use sykl_formatting::pretty_print_stations;
 
 struct Void;
 
@@ -22,7 +22,7 @@ fn print() -> Result<Void, attohttpc::Error> {
 
     let stations = bikeshare::join(status.data, info.data);
 
-    formatting::pretty_print_stations(stations.values());
+    pretty_print_stations(std::io::stdout().lock(), stations.values())?;
 
     Ok(Void)
 }
