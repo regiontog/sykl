@@ -1,0 +1,4 @@
+NAME              AVAILABLE DOCKS   AVAILABLE BIKES   
+Forskningsveien   39                0                 
+test              ---               ---               
+Ullevål sykehus   35                0                 

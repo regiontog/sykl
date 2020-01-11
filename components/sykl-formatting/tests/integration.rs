@@ -20,7 +20,9 @@ fn files_test_paths(input: &Path, output: &str) {
 
     let input: TestCase = from_reader(std::fs::File::open(input).unwrap()).unwrap();
 
-    pretty_print_stations(&mut output, input.iter());
-    assert_eq!(std::str::from_utf8(&output).unwrap(), expected_output);
+    pretty_print_stations(&mut output, input.iter()).unwrap();
+    let output = std::str::from_utf8(&output).unwrap();
+    eprint!("{}", output);
+    assert_eq!(output, expected_output);
     // assert_eq!(input.replace("input", "output"), output);
 }
