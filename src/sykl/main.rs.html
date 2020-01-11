@@ -60,7 +60,7 @@
 <span class="kw">use</span> <span class="ident">attohttpc</span>::<span class="ident">ErrorKind</span>;
 <span class="kw">use</span> <span class="ident">bikeshare</span>::<span class="ident">api</span>;
 
-<span class="kw">mod</span> <span class="ident">formatting</span>;
+<span class="kw">use</span> <span class="ident">sykl_formatting</span>::<span class="ident">pretty_print_stations</span>;
 
 <span class="kw">struct</span> <span class="ident">Void</span>;
 
@@ -79,7 +79,7 @@
 
     <span class="kw">let</span> <span class="ident">stations</span> <span class="op">=</span> <span class="ident">bikeshare</span>::<span class="ident">join</span>(<span class="ident">status</span>.<span class="ident">data</span>, <span class="ident">info</span>.<span class="ident">data</span>);
 
-    <span class="ident">formatting</span>::<span class="ident">pretty_print_stations</span>(<span class="ident">stations</span>.<span class="ident">values</span>());
+    <span class="ident">pretty_print_stations</span>(<span class="ident">std</span>::<span class="ident">io</span>::<span class="ident">stdout</span>().<span class="ident">lock</span>(), <span class="ident">stations</span>.<span class="ident">values</span>())<span class="question-mark">?</span>;
 
     <span class="prelude-val">Ok</span>(<span class="ident">Void</span>)
 }
