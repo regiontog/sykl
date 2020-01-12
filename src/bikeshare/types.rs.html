@@ -122,7 +122,7 @@
 
 <span class="doccomment">/// Both endpoints used by this application has the same top level layout,</span>
 <span class="doccomment">/// this struct generalized over them both.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Api</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">ApiData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 
@@ -132,13 +132,13 @@
 
 <span class="doccomment">/// Both endpoints used by this application has the same data layout with</span>
 <span class="doccomment">/// the stations key, this struct generalized over them both.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ApiData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="ident">stations</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// The data inside the station_status endpoint is modelled by this struct</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Status</span> {
     <span class="kw">pub</span> <span class="ident">station_id</span>: <span class="ident">String</span>,
     <span class="kw">pub</span> <span class="ident">is_installed</span>: <span class="ident">u64</span>,
@@ -152,7 +152,7 @@
 }
 
 <span class="doccomment">/// The data inside the station_information endpoint is modelled by this struct</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Information</span> {
     <span class="kw">pub</span> <span class="ident">station_id</span>: <span class="ident">String</span>,
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="ident">String</span>,
@@ -165,7 +165,7 @@
 <span class="doccomment">/// The status struct contains &quot;dynamic&quot; content about stations and the</span>
 <span class="doccomment">/// information endpoint has the &quot;static&quot; content. This struct represents</span>
 <span class="doccomment">/// a join of them both. The status content may be missing.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">JoinedStation</span> {
     <span class="kw">pub</span> <span class="ident">station_id</span>: <span class="ident">String</span>,
 
@@ -181,7 +181,7 @@
 }
 
 <span class="doccomment">/// The status content of `JoinedStation`.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>, <span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">JoinedStatus</span> {
     <span class="kw">pub</span> <span class="ident">is_installed</span>: <span class="ident">u64</span>,
     <span class="kw">pub</span> <span class="ident">is_renting</span>: <span class="ident">u64</span>,
