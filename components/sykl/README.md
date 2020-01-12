@@ -10,15 +10,15 @@ You can download the source from github and in the source directory run
 > cargo run --bin sykl
     Finished dev [unoptimized + debuginfo] target(s) in 0.07s
      Running `target/debug/sykl`
-NAME                           AVAILABLE DOCKS   AVAILABLE BIKES
-Botanisk Hage vest             26                0
-Linaaes gate                   21                0
-Suhms gate                     21                0
-Oslo Hospital                  15                0
-Arkitekt Rivertz Plass         30                0
-Grenseveien                    24                1
-John Colletts plass            25                0
-Hoffsveien                     18                0
-Nydalen                        18                0
+NAME                              AVAILABLE DOCKS   AVAILABLE BIKES
+Botanisk Hage vest      26                                0
+Linaaes gate                  21                                0
+Suhms gate                   21                                0
+Oslo Hospital                15                                0
+Arkitekt Rivertz Plass   30                                0
+Grenseveien                  24                                1
+John Colletts plass        25                                0
+Hoffsveien                     18                                0
+Nydalen                         18                                0
 ...
 ```
