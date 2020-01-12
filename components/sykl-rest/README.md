@@ -1,5 +1,5 @@
 # Installing
-If you are on x86-64 windows or linux you can download a prebuilt binary from [github releases](https://github.com/regiontog/sykl/releases). The binaries here are _not_ installers, but the program itself.
+If you are on x86-64 windows or linux you can download a prebuilt binary from [github releases](https://github.com/regiontog/sykl/releases/tag/sykl-rest-0.1.0). The binaries here are _not_ installers, but the program itself.
 
 # Running
 The web server takes no arguments and propably should be ran from the command line.
