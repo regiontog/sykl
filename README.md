@@ -1,3 +1,4 @@
+[![](https://github.com/regiontog/sykl/workflows/Rust/badge.svg)](https://github.com/regiontog/sykl/actions)
 # Components
 ## Sykl
 https://github.com/regiontog/sykl/blob/master/components/sykl
