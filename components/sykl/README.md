@@ -5,7 +5,7 @@ If you are on x86-64 windows or linux you can download a prebuilt binary from [g
 The application takes no arguments and writes to stdout, so it should be ran from the command line.
 
 # Compiling
-If you have a [rust toolchain](https://rustup.rs/) installed you can download the source from github and in the source directory run
+You can download the source from github and in the source directory run
 ```bash
 > cargo run --bin sykl
     Finished dev [unoptimized + debuginfo] target(s) in 0.07s
