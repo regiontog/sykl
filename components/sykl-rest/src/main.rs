@@ -1,4 +1,5 @@
 use std::sync::RwLock;
+use std::time::Duration;
 
 use actix_http::error::ResponseError;
 use actix_web::{get, http::StatusCode, web, App, HttpResponse, HttpServer};
@@ -47,15 +48,36 @@ async fn all_stations(stations: web::Data<Stations>) -> Result<HttpResponse, Int
     Ok(HttpResponse::Ok().json2(&*stations.read()?))
 }
 
+fn update_status_sync(stations: web::Data<Stations>) {
+    loop {
+        std::thread::sleep(Duration::from_secs(10));
+
+        // TODO: Would be better if bikeshare had an async api.
+        if let Ok(status) = bikeshare::api::status() {
+            match stations.write() {
+                Ok(mut stations) => {
+                    bikeshare::update_status(&mut stations, status.data);
+                }
+                e => eprintln!("Poisoned RWLock: {:#?}", e),
+            }
+        };
+    }
+}
+
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    // TODO: Update status periodically so that the i
-    // data returned by the endpoint is always up to date.
     let status = bikeshare::api::status()?;
     let info = bikeshare::api::information()?;
 
     let stations = RwLock::new(bikeshare::join(status.data, info.data));
     let stations = web::Data::new(stations);
+    let stations_update = stations.clone();
+
+    // Run update in own thread because bikeshare api is not
+    // async and it might block the async runtime.
+    std::thread::spawn(move || {
+        update_status_sync(stations_update);
+    });
 
     HttpServer::new(move || {
         App::new()
@@ -65,5 +87,7 @@ async fn main() -> std::io::Result<()> {
     })
     .bind("127.0.0.1:8080")?
     .run()
-    .await
+    .await?;
+
+    Ok(())
 }
