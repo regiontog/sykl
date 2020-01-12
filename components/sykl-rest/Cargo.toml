@@ -13,5 +13,3 @@ bikeshare = { version = "0.1", path = "../bikeshare" }
 actix-web = "2.0"
 actix-http = "1.0"
 actix-rt = "1.0"
-futures = "0.3"
-futures-timer = "2.0.2"

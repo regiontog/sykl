@@ -76,6 +76,32 @@ pub struct JoinedStatus {
     pub last_reported: DateTime<Utc>,
 }
 
+impl From<Status> for JoinedStatus {
+    fn from(status: Status) -> Self {
+        JoinedStatus {
+            is_installed: status.is_installed,
+            is_renting: status.is_renting,
+            num_bikes_available: status.num_bikes_available,
+            num_docks_available: status.num_docks_available,
+            is_returning: status.is_returning,
+            last_reported: status.last_reported,
+        }
+    }
+}
+
+impl From<&'_ Status> for JoinedStatus {
+    fn from(status: &Status) -> Self {
+        JoinedStatus {
+            is_installed: status.is_installed,
+            is_renting: status.is_renting,
+            num_bikes_available: status.num_bikes_available,
+            num_docks_available: status.num_docks_available,
+            is_returning: status.is_returning,
+            last_reported: status.last_reported,
+        }
+    }
+}
+
 impl JoinedStation {
     pub(super) fn new(status: Option<&Status>, info: Information) -> Self {
         JoinedStation {
@@ -85,14 +111,7 @@ impl JoinedStation {
             lon: info.lon,
             capacity: info.capacity,
 
-            status: status.map(|status| JoinedStatus {
-                is_installed: status.is_installed,
-                is_renting: status.is_renting,
-                num_bikes_available: status.num_bikes_available,
-                num_docks_available: status.num_docks_available,
-                is_returning: status.is_returning,
-                last_reported: status.last_reported,
-            }),
+            status: status.map(Into::into),
 
             station_id: info.station_id,
         }
