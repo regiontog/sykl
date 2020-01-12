@@ -1,5 +1,5 @@
-[
-    {
+{
+    "567": {
         "station_id": "567",
         "name": "Forskningsveien",
         "address": "Forskningsveien",
@@ -12,31 +12,15 @@
             "num_bikes_available": 0,
             "num_docks_available": 39,
             "is_returning": 1,
-            "last_reported": 0
+            "last_reported": 135245
         }
     },
-    {
-        "station_id": "0",
-        "name": "test",
-        "address": "test",
-        "lat": 0,
-        "lon": 0,
-        "capacity": 100
-    },
-    {
+    "502": {
         "station_id": "502",
         "name": "Ullevål sykehus",
         "address": "Kirkeveien / Ullevål sykehus",
         "lat": 59.9360307,
         "lon": 10.7364516,
-        "capacity": 35,
-        "status": {
-            "is_installed": 1,
-            "is_renting": 1,
-            "num_bikes_available": 0,
-            "num_docks_available": 35,
-            "is_returning": 1,
-            "last_reported": 0
-        }
+        "capacity": 35
     }
-]
+}

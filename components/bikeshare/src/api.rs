@@ -1,15 +1,16 @@
 use super::types::{Api, Information, Status};
 use attohttpc::{Error, Response};
 
-#[cfg(test)]
-use mockito;
-
 #[cfg(not(test))]
+/// Url of the remote api for non-tests
 const BIKESHARE_SERVER: &str = "https://gbfs.urbansharing.com/oslobysykkel.no";
 
 #[cfg(test)]
+use mockito;
+
+#[cfg(test)]
 lazy_static::lazy_static! {
-    /// Url of the remote api
+    /// Url of the remote api for tests
     static ref BIKESHARE_SERVER: &'static str = Box::leak(mockito::server_url().into_boxed_str());
 }
 

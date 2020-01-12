@@ -71,6 +71,8 @@ pub struct JoinedStatus {
     pub num_bikes_available: u64,
     pub num_docks_available: u64,
     pub is_returning: u64,
+
+    #[serde(with = "ts_seconds")]
     pub last_reported: DateTime<Utc>,
 }
 
