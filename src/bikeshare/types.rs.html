@@ -114,6 +114,8 @@
 <span id="114">114</span>
 <span id="115">115</span>
 <span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">borrow</span>::<span class="ident">Cow</span>;
 
@@ -188,6 +190,8 @@
     <span class="kw">pub</span> <span class="ident">num_bikes_available</span>: <span class="ident">u64</span>,
     <span class="kw">pub</span> <span class="ident">num_docks_available</span>: <span class="ident">u64</span>,
     <span class="kw">pub</span> <span class="ident">is_returning</span>: <span class="ident">u64</span>,
+
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">with</span> <span class="op">=</span> <span class="string">&quot;ts_seconds&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">last_reported</span>: <span class="ident">DateTime</span><span class="op">&lt;</span><span class="ident">Utc</span><span class="op">&gt;</span>,
 }
 
