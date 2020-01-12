@@ -79,12 +79,16 @@ pub fn pretty_print_stations<'a>(
     Ok(())
 }
 
+/// Returns a string that when prepended/appended to `unicode`
+/// makes the total _unicode_ width greater than or equal to `width`.
 /// # Panics
 /// Panics if pad is not a single width character
 pub fn pad(unicode: &str, width: usize, pad: char) -> String {
     pad_into_buffer(String::new(), unicode, width, pad)
 }
 
+/// Returns a string that when prepended/appended to `unicode`
+/// makes the total _unicode_ width greater than or equal to `width`.
 /// # Panics
 /// Panics if pad is not a single width character
 pub fn pad_into_buffer(mut buffer: String, unicode: &str, width: usize, pad: char) -> String {

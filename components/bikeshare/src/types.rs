@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 
 /// Both endpoints used by this application has the same top level layout,
 /// this struct generalized over them both.
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Api<T> {
     pub data: ApiData<T>,
 
@@ -15,13 +15,13 @@ pub struct Api<T> {
 
 /// Both endpoints used by this application has the same data layout with
 /// the stations key, this struct generalized over them both.
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct ApiData<T> {
     pub stations: Vec<T>,
 }
 
 /// The data inside the station_status endpoint is modelled by this struct
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Status {
     pub station_id: String,
     pub is_installed: u64,
@@ -35,7 +35,7 @@ pub struct Status {
 }
 
 /// The data inside the station_information endpoint is modelled by this struct
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct Information {
     pub station_id: String,
     pub name: String,
@@ -48,7 +48,7 @@ pub struct Information {
 /// The status struct contains "dynamic" content about stations and the
 /// information endpoint has the "static" content. This struct represents
 /// a join of them both. The status content may be missing.
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct JoinedStation {
     pub station_id: String,
 
@@ -64,7 +64,7 @@ pub struct JoinedStation {
 }
 
 /// The status content of `JoinedStation`.
-#[derive(Deserialize, Serialize, Debug)]
+#[derive(Deserialize, Serialize, Debug, PartialEq)]
 pub struct JoinedStatus {
     pub is_installed: u64,
     pub is_renting: u64,

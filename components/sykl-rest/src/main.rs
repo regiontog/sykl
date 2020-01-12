@@ -1,13 +1,13 @@
-use std::sync::{RwLock};
+use std::sync::RwLock;
 
-use actix_web::{get, web, App, HttpServer, HttpResponse, http::StatusCode};
 use actix_http::error::ResponseError;
+use actix_web::{get, http::StatusCode, web, App, HttpResponse, HttpServer};
 
 type Stations = RwLock<std::collections::HashMap<String, bikeshare::types::JoinedStation>>;
 
 #[derive(Debug)]
 enum InternalError {
-    LockError
+    LockError,
 }
 
 impl<T> From<std::sync::PoisonError<T>> for InternalError {
@@ -29,7 +29,10 @@ impl ResponseError for InternalError {
 }
 
 #[get("/station/{id}")]
-async fn station(id: web::Path<String>, stations: web::Data<Stations>) -> Result<HttpResponse, InternalError> {
+async fn station(
+    id: web::Path<String>,
+    stations: web::Data<Stations>,
+) -> Result<HttpResponse, InternalError> {
     let lock = stations.read()?;
 
     if let Some(station) = lock.get(&*id) {
@@ -54,8 +57,13 @@ async fn main() -> std::io::Result<()> {
     let stations = RwLock::new(bikeshare::join(status.data, info.data));
     let stations = web::Data::new(stations);
 
-    HttpServer::new(move || App::new().app_data(stations.clone()).service(all_stations).service(station))
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    HttpServer::new(move || {
+        App::new()
+            .app_data(stations.clone())
+            .service(all_stations)
+            .service(station)
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
 }

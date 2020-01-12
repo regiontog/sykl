@@ -18,6 +18,7 @@ This repo hosts documentation on Github pages since docs.rs only has documentati
 ```
 
 # Testing
+You can run the tests(requires nightly) by using the command:
 ```bash
-> cargo test
+> cargo +nightly test
 ```
