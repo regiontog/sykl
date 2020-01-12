@@ -94,7 +94,7 @@ pub fn pad(unicode: &str, width: usize, pad: char) -> String {
 pub fn pad_into_buffer(mut buffer: String, unicode: &str, width: usize, pad: char) -> String {
     assert_eq!(pad.width(), Some(1));
 
-    let padding_size = width.checked_sub(unicode.width()).unwrap_or(0);
+    let padding_size = width.saturating_sub(unicode.width());
     buffer.truncate(0);
     buffer.reserve(padding_size * pad.len_utf8());
 
