@@ -29,6 +29,18 @@
 <span id="29">29</span>
 <span id="30">30</span>
 <span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
 
@@ -36,6 +48,18 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">types</span>;
 
 <span class="kw">use</span> <span class="ident">types</span>::<span class="kw-2">*</span>;
+
+<span class="doccomment">/// Updates all stations in `joined` with statuses from `status` if a corresponding key is found.</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_status</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">std</span>::<span class="ident">hash</span>::<span class="ident">BuildHasher</span><span class="op">&gt;</span>(
+    <span class="ident">joined</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">JoinedStation</span>, <span class="ident">S</span><span class="op">&gt;</span>,
+    <span class="ident">status</span>: <span class="ident">ApiData</span><span class="op">&lt;</span><span class="ident">Status</span><span class="op">&gt;</span>,
+) {
+    <span class="kw">for</span> <span class="ident">status</span> <span class="kw">in</span> <span class="ident">status</span>.<span class="ident">stations</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">station</span>) <span class="op">=</span> <span class="ident">joined</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">status</span>.<span class="ident">station_id</span>) {
+            <span class="ident">station</span>.<span class="ident">status</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">status</span>.<span class="ident">into</span>());
+        }
+    }
+}
 
 <span class="doccomment">/// Joins the data from status and information into a hashmap from `station_id -&gt; JoinedStation`.</span>
 <span class="doccomment">/// If a station in the information data is not in the status data the JoinedStation has</span>
